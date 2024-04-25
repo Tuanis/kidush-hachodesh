@@ -10,7 +10,14 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </head>
 <body>
-  <?php require_once('classes.php'); ?>
+  <?php
+    require_once('classes.php');
+    $ezmolad   = new Molad();
+    $ezsheerit = new Sheerit();
+    $ezmonth   = new Month();
+    $ezyear    = new Year();
+    $ezmachzor = new Machzor();
+  ?>
   <h1>
     <center>הלכות קידוש החודש להרמב"ם</center>
   </h1>
@@ -146,4 +153,44 @@
     </tr>
     </tbody>
   </table>
+
+  <?php
+    list(,,$this_year) = explode('/',jdtojewish(unixtojd()));
+  ?>
+  <table class="table table-bordered table-striped w-auto">
+    <thead>
+      <tr>
+        <th>השנה</th>
+        <th>היא שנת</th>
+        <th>ממחזור קטן</th>
+        <th>ושנת</th>
+        <th>ממחזור גדול</th>
+        <th>שנה מעוברת</th>
+      </tr>
+    </thead>
+    <tbody>
+    <?php
+      $machzor_katan = $ezmachzor->get_machzor_katan_info($this_year);
+      $first = $machzor_katan['first'];
+      $last = $machzor_katan['last'];
+      for ($year = $first; $year <= $last + 1; $year++)
+      {
+        $is_meuveret   = $ezyear->is_meuveret($year);
+        $machzor_katan = $ezmachzor->get_machzor_katan_info($year);
+        $machzor_gadol = $ezmachzor->get_machzor_gadol_info($year);
+    ?>
+      <tr>
+        <td <?= ($year == $this_year) ? 'class="text-decoration-underline"' : '' ?>'><?= $year ?></td>
+        <td><?= $machzor_katan['year'] ?></td>
+        <td><?= $machzor_katan['machzor'] ?></td>
+        <td><?= $machzor_gadol['year'] ?></td>
+        <td><?= $machzor_gadol['machzor'] ?></td>
+        <td><?= $is_meuveret ? 'כן' : 'לא' ?></td>
+      </tr>
+    <?php
+      }
+    ?>
+    </tbody>
+  </table>
+
 </body>
