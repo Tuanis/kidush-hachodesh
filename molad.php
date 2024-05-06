@@ -1,86 +1,24 @@
 <!DOCTYPE html>
-<html lang="he_IL" dir="rtl">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>קידוש החודש</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<?php
+  $title = 'קידוש החודש'. '&nbsp;|&nbsp;' .'חשבונות';
+  include('header.php');
+?>
 </head>
-<body>
+<body lang="he_IL" dir="rtl">
   <?php
     require_once('classes.php');
+    require_once('utils.php');
+
     $ezmolad   = new Molad();
     $ezsheerit = new Sheerit();
     $ezmonth   = new Month();
     $ezyear    = new Year();
     $ezmachzor = new Machzor();
   ?>
-  <h1>
-    <center>הלכות קידוש החודש להרמב"ם</center>
-  </h1>
-  <?php $molad = $ezmolad->molad_days(); ?>
-  <h6>חז"ל קיבלו שהמולד קורה בממוצע כל 29 יום, 12 שעות, 793 חלקים. דהיינו כל  <?= $molad ?> ימים.</h6>
-  <table class="table table-bordered table-striped w-auto">
-    <thead>
-      <tr>
-        <th>חודשים</th>
-        <th>ימים</th>
-        <th>שעות</th>
-        <th>חלקים</th>
-      </tr>
-    </thead>
-    <tbody>
-    <?php
-      for ($months = 1; $months <= 13; $months++)
-      {
-        $moladim = $ezmonth->chodashim($months);
-        echo '<tr><td>' . $moladim['months'] . '</td><td>' . $moladim['days'] . '</td><td>' . $moladim['hours'] . '</td><td>' . $moladim['chalakim'] . '</td></tr>';
-      }
-    ?>
-    </tbody>
-  </table>
-
-  <table class="table table-bordered table-striped w-auto">
-    <thead>
-      <tr>
-        <th>שארית</th>
-        <th>ימים</th>
-        <th>שעות</th>
-        <th>חלקים</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-    <?php
-      foreach ([1, 12, 13] as $months)
-      {
-        echo '<tr>';
-        switch ($months)
-        {
-          case 1:
-            echo '<td>'.'שארית חודש'.'</td>';
-            $sheerit = $ezmonth->sheerit_chodesh();
-            $remez = 'אי"ב תשצ"ג';
-            break;
-          case 12:
-            echo '<td>'.'שארית שנה פשוטה'.'</td>';
-            $sheerit = $ezyear->sheerit_shana_pshuta();
-            $remez = 'ד"ח תתע"ו';
-            break;
-          case 13:
-            echo '<td>'.'שארית שנה מעוברת'.'</td>';
-            $sheerit = $ezyear->sheerit_shana_meuveret();
-            $remez = 'הכ"א תקפ"ט';
-            break;
-        }
-        echo '<td>' . $sheerit['days'] . '</td><td>' . $sheerit['hours'] . '</td><td>' . $sheerit['chalakim'] . '</td><td>'.$remez.'</td></tr>';
-      }
-    ?>
-    </tbody>
-  </table>
+  <h1><center>הלכות קידוש החודש להרמב"ם</center></h1>
 
   <table class="table table-bordered table-striped w-auto">
     <thead>
@@ -155,7 +93,7 @@
   </table>
 
   <?php
-    list(,,$this_year) = explode('/',jdtojewish(unixtojd()));
+    $this_year = this_year();
   ?>
   <table class="table table-bordered table-striped w-auto">
     <thead>
