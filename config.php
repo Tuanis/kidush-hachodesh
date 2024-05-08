@@ -7,4 +7,3 @@ define('CHALAKIM_IN_MOLAD', 793);
 define('HOURS_IN_DAY', 24);
 define('DAYS_IN_WEEK', 7);
 define('LEAP_YEARS', [3,6,8,11,14,17,19]); // the seven leap years in the cycle of 19
-?>

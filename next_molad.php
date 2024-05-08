@@ -4,13 +4,22 @@
   $this_month_days     = $_POST['this_month_days'];
   $this_month_hours    = $_POST['this_month_hours'];
   $this_month_chalakim = $_POST['this_month_chalakim'];
-  $sheerit_days        = $_POST['sheerit_days'];
-  $sheerit_hours       = $_POST['sheerit_hours'];
-  $sheerit_chalakim    = $_POST['sheerit_chalakim'];
   
   $molad = new Molad($this_month_days, $this_month_hours, $this_month_chalakim);
-  $ib_tashtzag = new Molad($sheerit_days, $sheerit_hours, $sheerit_chalakim);
+  $molad->next_molad();
+  $molad->sheerit();
 
-  $molad->add($ib_tashtzag);
-  echo $molad;
-?>
+  $translation = $molad->translate();
+
+  $json = json_encode(
+    array(
+      'next_molad' => array(
+        'days'     => $molad->days,
+        'hours'    => $molad->hours,
+        'chalakim' => $molad->chalakim,
+      ),
+      'translation' => $translation,
+    )
+  );
+
+  echo $json;

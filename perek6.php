@@ -273,15 +273,13 @@
         <td><input id="this_month_chalakim" type="number" min="0" max="1079"  step="1" onchange="calculate_next_month()" value="1079"></td>
       </tr>
       <?php
-        $sheerit_month = new Molad;
-        $sheerit_month->moladim(1);
-        $sheerit_month->sheerit();
+        $ib_tashtzag = Molad::ib_tashtzag();
       ?>
       <tr>
         <td>אי"ב תשצ"ג:</td>
-        <td id="sheerit_days"><?= $sheerit_month->days ?></td>
-        <td id="sheerit_hours"><?= $sheerit_month->hours ?></td>
-        <td id="sheerit_chalakim"><?= $sheerit_month->chalakim ?></td>
+        <td><?= $ib_tashtzag->days ?></td>
+        <td><?= $ib_tashtzag->hours ?></td>
+        <td><?= $ib_tashtzag->chalakim ?></td>
       </tr>
       <tr class="total">
         <td>חודש הבא</td>
@@ -306,12 +304,11 @@
     let this_month_days      = $("#this_month_days").val();
     let this_month_hours     = $("#this_month_hours").val();
     let this_month_chalakim  = $("#this_month_chalakim").val();
-    let sheerit_days         = $("#sheerit_days").text();
-    let sheerit_hours        = $("#sheerit_hours").text();
-    let sheerit_chalakim     = $("#sheerit_chalakim").text();
+
     let next_month_days      = $("#next_month_days");
     let next_month_hours     = $("#next_month_hours");
     let next_month_chalakim  = $("#next_month_chalakim");
+
     let translation_days     = $("#translation_days");
     let translation_hours    = $("#translation_hours");
     let translation_chalakim = $("#translation_chalakim");
@@ -320,48 +317,22 @@
       {
         'this_month_days'    : this_month_days,
         'this_month_hours'   : this_month_hours,
-        'this_month_chalakim': this_month_chalakim,
-        'sheerit_days'       : sheerit_days,
-        'sheerit_hours'      : sheerit_hours,
-        'sheerit_chalakim'   : sheerit_chalakim,
+        'this_month_chalakim': this_month_chalakim
       },
       function()
       {
         let next_month = $(this).text();
-        let [days, hours, chalakim] = next_month.split(':');
-        next_month_days.text(days);
-        next_month_hours.text(hours + '  (מ- 6 אחה"צ)');
-        next_month_chalakim.text(chalakim);
+        next_month = JSON.parse(next_month);
 
-        translation_days.text(weekday(days));
-        translation_hours.text(real_time(hours, chalakim));
-        translation_chalakim.text(chalakim % 18); // 18 CHALAKIM / MINUTE
+        next_month_days.text(next_month.next_molad.days);
+        next_month_hours.text(next_month.next_molad.hours + '  (מ- 6 אחה"צ)');
+        next_month_chalakim.text(next_month.next_molad.chalakim);
+        
+        translation_days.text(next_month.translation.day);
+        translation_hours.text(next_month.translation.hour);
+        translation_chalakim.text(next_month.translation.chalakim);
       }
-    )
-  }
-
-  function weekday(day)
-  {
-    const weekdays = {
-      1: 'ראשון',
-      2: 'שני',
-      3: 'שלישי',
-      4: 'רביעי',
-      5: 'חמישי',
-      6: 'שישי',
-      7: 'שבת',
-    };
-    return weekdays[day];
-  }
-
-  function real_time(hour, chalakim)
-  {
-    let realHour = (parseInt(hour) + 18) % 24;
-    let minutes = Math.floor(chalakim / 18); // 18 CHALAKIM / MINUTE
-    let am_pm = (realHour < 12 ? ' AM' : ' PM');
-    realHour = realHour % 12 || 12;
-    
-    return `${realHour}:${minutes < 10 ? '0' + minutes : minutes} ${am_pm}`;
+    );
   }
 
   calculate_next_month();
