@@ -75,6 +75,13 @@ class Molad {
     $this->add($this->ib_tashtzag());
   }
 
+  // this is what is announced on shabbos mevarchim "המולד יהיה"
+  public function announced_molad()
+  {
+    $this->sheerit();
+    $this->days = (int)$this->days ?: DAYS_IN_WEEK;
+  }
+
   public function __toString()
   {
     return "{$this->days}:{$this->hours}:{$this->chalakim}";
@@ -82,10 +89,8 @@ class Molad {
 
   public function translate()
   {
-    $day = (int)$this->days ?: DAYS_IN_WEEK;
-    // this is what is announced on shabbos mevarchim "המולד יהיה"
     return array(
-      'day'      => $this->weekday($day),
+      'day'      => $this->weekday($this->days),
       'hour'     => $this->real_time($this->hours, $this->chalakim),
       'chalakim' => $this->chalakim % CHALAKIM_IN_MINUTE
     );

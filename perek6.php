@@ -24,6 +24,7 @@
     <a href="#6-5">הלכה ה</a>&ThickSpace;
     <a href="#6-6">הלכה ו</a>&ThickSpace;
     <a href="#6-7">הלכה ז</a>&ThickSpace;
+    <a href="#6-8">הלכה ח</a>&ThickSpace;
 
     <?php
     #region Halacha 1
@@ -33,7 +34,7 @@
     <?php
     #endregion
     #region Halacha 2
-    ?>    
+    ?>
     <h3 id="6-2">הלכה ב</h3>
     <p>היום והלילה כ"ד שעות בכל זמן: י"ב ביום וי"ב בלילה.<br>והשעה מחולקת לאלף ושמנים (1080) חלקים.</p>
     <div class="row row-cols-auto">
@@ -140,7 +141,7 @@
     <?php
     #endregion
     #region Halacha 3
-    ?>    
+    ?>
     <h3 id="6-3">הלכה ג</h3>
     <p>משיתקבץ הירח והחמה לפי חשבון זה, עד שיתקבצו פעם שנייה במהלכם האמצעי, כ"ט יום וי"ב שעות מיום שלשים מתחלת לילו, ושבע מאות ושלשה ותשעים חלקים (793) משעת י"ג. וזה הוא הזמן שבין כל מולד ומולד, וזה הוא <b>חדשה של לבנה</b>.</p>
 
@@ -155,7 +156,7 @@
     <?php
     #endregion
     #region Halacha 4
-    ?>    
+    ?>
     <h3 id="6-4">הלכה ד</h3>
     <p><b>שנה של לבנה</b>:<br>אם תהיה שנים עשר חדש מחדשים אלו, יהיה כללה שלש מאות יום וארבעה וחמשים (354) יום, ושמנה שעות, ושמנה מאות וששה ושבעים (876) חלקים.<br>ואם תהיה מעוברת –ותהיה השנה שלשה עשר חדש– יהיה כללה שלש מאות ושמונים ושלשה (383) יום, ואחת ועשרים שעות, וחמש מאות תשעה ושמונים (589) חלקים.</p>
 
@@ -223,7 +224,7 @@
     <?php
     #endregion
     #region Halacha 5
-    ?>    
+    ?>
     <h3 id="6-5">הלכה ה</h3>
     <p>כשתשליך ימי חדש הלבנה שבעה שבעה, שהן ימי השבוע, ישאר יום אחד וי"ב שעות ושבע מאות ושלשה ותשעים (793) חלקים; סימן להם אי"ב תשצ"ג, וזו היא <b>שארית חדש הלבנה</b>.<br>וכן כשתשליך ימי שנת הלבנה שבעה שבעה: אם שנה פשוטה היא, ישאר ממנה ארבעה ימים ושמנה שעות ושמנה מאות וששה ושבעים (876) חלקים; סימן לה ד"ח תתע"ו, וזו היא <b>שארית שנה פשוטה</b>.<br>ואם <b>שנה מעוברת</b> היא, תהיה שאריתה חמשה ימים ואחת ועשרים שעות וחמש מאות תשעה ושמונים (589) חלקים; סימן להם הכ"א תקפ"ט</p>
 
@@ -268,7 +269,7 @@
     <?php
     #endregion
     #region Halacha 6
-    ?>    
+    ?>
     <h3 id="6-6">הלכה ו</h3>
     <p>כשיהיה עמך ידוע מולד חדש מן החדשים, ותוסיף עליו אי"ב תשצ"ג, יצא מולד חדש שאחריו; ותדע באי זה יום מימי השבוע, ובאי זו שעה, ובכמה חלקים יהיה.</p>
 
@@ -298,7 +299,7 @@
         <td><?= $ib_tashtzag->chalakim ?></td>
       </tr>
       <tr class="total">
-        <td>חודש הבא</td>
+        <td>חודש הבא:</td>
         <td id="next_month_days"></td>
         <td id="next_month_hours"></td>
         <td id="next_month_chalakim"></td>
@@ -316,10 +317,11 @@
   <?php
     #endregion
     #region Halacha 7
-  ?>    
+  ?>
   <h3 id="6-7">הלכה ז</h3>
   <p>כיצד? הרי שהיה מולד ניסן באחד בשבת, בחמש שעות ביום, ומאה ושבעה חלקים; סימן להם אהק"ז. כשתוסיף עליו שארית חדש הלבנה, והוא אי"ב תשצ"ג, יצא מולד אייר בליל שלישי, חמש שעות בלילה, ותשע מאות חלקים; סימן להם ג"ה תת"ק. ועל דרך זו עד סוף העולם, חדש אחר חדש.</p>
 
+  <p class="explanation p-2">לכאורה הפשט הוא כך (אע"פ שהמולד הראשון לא מתאים לרמז אהק"ז):</p>
   <table class="table table-bordered table-striped w-auto">
     <thead>
       <tr>
@@ -351,12 +353,12 @@
     <?php
       $molad = new Molad(1, 17, 107);
       $molad->next_molad();
-      $molad->sheerit();
+      $molad->announced_molad();
     
       $translation = $molad->translate();
     ?>
     <tr class="total">
-      <td>אייר</td>
+      <td>אייר:</td>
       <td><?= $molad->days; ?></td>
       <td><?= $molad->hours; ?></td>
       <td><?= $molad->chalakim; ?></td>
@@ -367,9 +369,128 @@
       <td><?= $translation['day']; ?></td>
       <td dir="ltr" style="text-align: center;"><?= $translation['hour']; ?></td>
       <td><?= $translation['chalakim']; ?></td>
+      <td></td>
     </tr>
     </tbody>
   </table>
+  <?php
+    #endregion
+    #region Halacha 8
+  ?>
+  <h3 id="6-8">הלכה ח</h3>
+  <p>וכן כשיהיה עמך ידוע מולד שנה זו, ותוסיף שאריתה על ימי המולד –אם פשוטה היא שארית הפשוטה, ואם מעוברת היא שארית המעוברת– יצא לך מולד שנה שלאחריה. וכן שנה אחר שנה, עד סוף העולם.</p>
+  <div class="row row-cols-auto">
+    <div class="col">
+      <table class="table table-bordered table-striped w-auto">
+        <thead>
+          <tr>
+            <th></th>
+            <th>יום</th>
+            <th>שעות</th>
+            <th>חלקים</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>תשרי תשס"ט:</td>
+          <td>3</td>
+          <td>7</td>
+          <td>1057</td>
+        </tr>
+        <?php
+          $sheerit->moladim(12);
+          $sheerit->sheerit();
+        ?>
+        <tr>
+          <td>שארית שנה פשוטה:</td>
+          <td><?= $sheerit->days ?></td>
+          <td><?= $sheerit->hours ?></td>
+          <td><?= $sheerit->chalakim ?></td>
+        </tr>
+        <?php
+          $molad = new Molad(3, 7, 1057);
+          $molad->add($sheerit);
+          $molad->announced_molad();
+        
+          $translation = $molad->translate();
+        ?>
+        <tr class="total">
+          <td>תשרי תש"ע:</td>
+          <td><?= $molad->days; ?></td>
+          <td><?= $molad->hours; ?></td>
+          <td><?= $molad->chalakim; ?></td>
+        </tr>
+        <tr>
+          <td>תרגומו:</td>
+          <td><?= $translation['day']; ?></td>
+          <td dir="ltr" style="text-align: center;"><?= $translation['hour']; ?></td>
+          <td><?= $translation['chalakim']; ?></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <table class="table table-bordered table-striped w-auto">
+        <thead>
+          <tr>
+            <th></th>
+            <th>יום</th>
+            <th>שעות</th>
+            <th>חלקים</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>תשרי תשס"ח:</td>
+          <td>4</td>
+          <td>10</td>
+          <td>468</td>
+        </tr>
+        <?php
+          $sheerit->moladim(13);
+          $sheerit->sheerit();
+        ?>
+        <tr>
+          <td>שארית שנה מעוברת:</td>
+          <td><?= $sheerit->days ?></td>
+          <td><?= $sheerit->hours ?></td>
+          <td><?= $sheerit->chalakim ?></td>
+        </tr>
+        <?php
+          $molad = new Molad(4, 10, 468);
+          $molad->add($sheerit);
+          $molad->announced_molad();
+        
+          $translation = $molad->translate();
+        ?>
+        <tr class="total">
+          <td>תשרי תשס"ט:</td>
+          <td><?= $molad->days; ?></td>
+          <td><?= $molad->hours; ?></td>
+          <td><?= $molad->chalakim; ?></td>
+        </tr>
+        <tr>
+          <td>תרגומו:</td>
+          <td><?= $translation['day']; ?></td>
+          <td dir="ltr" style="text-align: center;"><?= $translation['hour']; ?></td>
+          <td><?= $translation['chalakim']; ?></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p>ו<b>המולד הראשון</b> שממנו תתחיל, הוא מולד שהיה בשנה הראשונה של יצירה; והוא היה בליל שני, חמש שעות בלילה, ומאתים וארבעה חלקים - סימן להם <b>בהר"ד</b>. וממנו הוא תחלת החשבון.</p>
+  <p class="explanation p-2">הוא המולד של חודש תשרי של שנה שלא היתה בעולם - החודש תשרי שלפני אותו חודש אלול שבו התחילו שישה ימי בראשית. שנה לפני יצירת האדם. "שנת תוהו".</p>
+  <?php
+    #endregion
+    #region Halacha 9
+  ?>
+  <h3 id="6-9">הלכה ט</h3>
+  <p>בכל החשבונות האלו שתדע מהן המולד, כשתוסיף שארית עם שארית: כשיתקבץ מן החלקים אלף ושמנים, תשליך שעה אחת ותוסיף אותו למנין השעות; וכשיתקבץ מן השעות ארבע ועשרים, תשליך יום ותוסיף ממנו למנין הימים; וכשיתקבץ מן הימים יותר על שבעה, תשליך שבעה מן המנין ותניח השאר. שאין אנו מחשבין לידע מניין הימים; אלא לידע באי זה יום מימי השבוע, ובאי זה שעה, ואי זה חלק יהיה המולד.</p>
+  <?php
+    #endregion
+  ?>    
 
 </body>
 <script type="text/javascript">

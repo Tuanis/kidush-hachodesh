@@ -7,7 +7,7 @@
   
   $molad = new Molad($this_month_days, $this_month_hours, $this_month_chalakim);
   $molad->next_molad();
-  $molad->sheerit();
+  $molad->announced_molad();
 
   $translation = $molad->translate();
 
