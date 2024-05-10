@@ -16,7 +16,9 @@ class Molad {
 
   public static function ib_tashtzag()
   {
-    return new Molad(DAYS_IN_MOLAD, HOURS_IN_MOLAD, CHALAKIM_IN_MOLAD);
+    $molad = new Molad(DAYS_IN_MOLAD, HOURS_IN_MOLAD, CHALAKIM_IN_MOLAD);
+    $molad->sheerit();
+    return $molad;
   }
 
   public function moladim($months)
