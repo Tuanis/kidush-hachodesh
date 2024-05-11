@@ -14,20 +14,16 @@ class Molad {
     $this->adjust();
   }
 
+  public function __toString()
+  {
+    return "{$this->days}:{$this->hours}:{$this->chalakim}";
+  }
+
   public static function ib_tashtzag()
   {
     $molad = new Molad(DAYS_IN_MOLAD, HOURS_IN_MOLAD, CHALAKIM_IN_MOLAD);
     $molad->sheerit();
     return $molad;
-  }
-
-  public function moladim($months)
-  {
-    $this->days     = $months * DAYS_IN_MOLAD;
-    $this->hours    = $months * HOURS_IN_MOLAD;
-    $this->chalakim = $months * CHALAKIM_IN_MOLAD;
-
-    $this->adjust();
   }
 
   // public function sum($moladim1, $moladim2)
@@ -75,6 +71,15 @@ class Molad {
     $this->hours    %= HOURS_IN_DAY;
   }
 
+  public function moladim($months)
+  {
+    $this->days     = $months * DAYS_IN_MOLAD;
+    $this->hours    = $months * HOURS_IN_MOLAD;
+    $this->chalakim = $months * CHALAKIM_IN_MOLAD;
+
+    $this->adjust();
+  }
+
   public function sheerit()
   {
     $this->days %= DAYS_IN_WEEK;
@@ -90,11 +95,6 @@ class Molad {
   {
     $this->sheerit();
     $this->days = (int)$this->days ?: DAYS_IN_WEEK;
-  }
-
-  public function __toString()
-  {
-    return "{$this->days}:{$this->hours}:{$this->chalakim}";
   }
 
   public function translate()
