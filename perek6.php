@@ -11,7 +11,16 @@
 <body lang="he_IL" dir="rtl">
   <?php
   require_once('utils.php');
-  require_once('classes.php'); 
+  require_once('molad.php');
+  require_once('year.php');
+
+  $ib_tashtzag      = Molad::ib_tashtzag();
+  $solar_year       = new Molad(365, 6);
+  $shana_pshuta     = Year::shana_pshuta();
+  $shana_meuveret   = Year::shana_meuveret();
+  $sheerit_pshuta   = Year::sheerit_shana_pshuta();
+  $sheerit_meuveret = Year::sheerit_shana_meuveret();
+
   ?>
   <div class="container">
     <h1><center>הלכות קידוש החודש להרמב"ם</center></h1>
@@ -200,11 +209,6 @@
         </tr>
       </thead>
       <tbody>
-      <?php
-        $solar_year = new Molad(365, 6);
-        $lunar_year = new Molad();
-        $lunar_year->shanim_pshutot(1);
-      ?>
       <tr>
         <td>שנת החמה</td>
         <td><?= $solar_year->days ?></td>
@@ -213,13 +217,13 @@
       </tr>
       <tr>
         <td>שנת הלבנה</td>
-        <td><?= $lunar_year->days ?></td>
-        <td><?= $lunar_year->hours ?></td>
-        <td><?= $lunar_year->chalakim ?></td>
+        <td><?= $shana_pshuta->days ?></td>
+        <td><?= $shana_pshuta->hours ?></td>
+        <td><?= $shana_pshuta->days ?></td>
       </tr>
       <?php
         $difference = clone $solar_year;
-        $difference->subtract($lunar_year);
+        $difference->subtract($shana_pshuta);
       ?>
       <tr class="total">
         <td>תוספת</td>
@@ -297,9 +301,6 @@
         <td><input id="this_month_hours"    type="number" min="0" max="23"    step="1" onchange="calculate_next_month()" value="23"></td>
         <td><input id="this_month_chalakim" type="number" min="0" max="1079"  step="1" onchange="calculate_next_month()" value="1079"></td>
       </tr>
-      <?php
-        $ib_tashtzag = Molad::ib_tashtzag();
-      ?>
       <tr>
         <td>אי"ב תשצ"ג:</td>
         <td><?= $ib_tashtzag->days ?></td>
@@ -348,9 +349,6 @@
       <td>107</td>
       <td>חמש שעות ביום (נץ = 6)</td>
     </tr>
-    <?php
-      $ib_tashtzag = Molad::ib_tashtzag();
-    ?>
     <tr>
       <td>אי"ב תשצ"ג:</td>
       <td><?= $ib_tashtzag->days ?></td>
@@ -405,19 +403,15 @@
           <td>7</td>
           <td>1057</td>
         </tr>
-        <?php
-          $sheerit->shanim_pshutot(1);
-          $sheerit->sheerit();
-        ?>
         <tr>
           <td>שארית שנה פשוטה:</td>
-          <td><?= $sheerit->days ?></td>
-          <td><?= $sheerit->hours ?></td>
-          <td><?= $sheerit->chalakim ?></td>
+          <td><?= $sheerit_pshuta->days ?></td>
+          <td><?= $sheerit_pshuta->hours ?></td>
+          <td><?= $sheerit_pshuta->chalakim ?></td>
         </tr>
         <?php
           $molad = new Molad(3, 7, 1057);
-          $molad->add($sheerit);
+          $molad->add($sheerit_pshuta);
           $molad->announced_molad();
         
           $translation = $molad->translate();
@@ -454,19 +448,15 @@
           <td>10</td>
           <td>468</td>
         </tr>
-        <?php
-          $sheerit->shanim_meuvarot(1);
-          $sheerit->sheerit();
-        ?>
         <tr>
           <td>שארית שנה מעוברת:</td>
-          <td><?= $sheerit->days ?></td>
-          <td><?= $sheerit->hours ?></td>
-          <td><?= $sheerit->chalakim ?></td>
+          <td><?= $sheerit_meuveret->days ?></td>
+          <td><?= $sheerit_meuveret->hours ?></td>
+          <td><?= $sheerit_meuveret->chalakim ?></td>
         </tr>
         <?php
           $molad = new Molad(4, 10, 468);
-          $molad->add($sheerit);
+          $molad->add($sheerit_meuveret);
           $molad->announced_molad();
         
           $translation = $molad->translate();
@@ -516,7 +506,7 @@
       <?php
         $num_pshutot = 12;
         $months_pshuta = 12;
-        $pshutot = new Molad();
+        $pshutot = new Year();
         $pshutot->shanim_pshutot($num_pshutot);
       ?>
       <tr>
@@ -529,7 +519,7 @@
       <?php
         $num_meuvarot = 7;
         $months_meuveret = 13;
-        $meuvarot = new Molad();
+        $meuvarot = new Year();
         $meuvarot->shanim_meuvarot($num_meuvarot);
       ?>
       <tr>

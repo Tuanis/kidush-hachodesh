@@ -26,6 +26,16 @@ class Molad {
     return $molad;
   }
 
+  // group chalakim into hours, and hours into days
+  // private function adjust($moladim)
+  private function adjust()
+  {
+    $this->hours    += intdiv($this->chalakim, CHALAKIM_IN_HOUR);
+    $this->chalakim %= CHALAKIM_IN_HOUR;
+    $this->days     += intdiv($this->hours, HOURS_IN_DAY);
+    $this->hours    %= HOURS_IN_DAY;
+  }
+
   // public function sum($moladim1, $moladim2)
   public function add($molad)
   {
@@ -61,16 +71,6 @@ class Molad {
     $this->adjust();
   }
 
-  // group chalakim into hours, and hours into days
-  // private function adjust($moladim)
-  private function adjust()
-  {
-    $this->hours    += intdiv($this->chalakim, CHALAKIM_IN_HOUR);
-    $this->chalakim %= CHALAKIM_IN_HOUR;
-    $this->days     += intdiv($this->hours, HOURS_IN_DAY);
-    $this->hours    %= HOURS_IN_DAY;
-  }
-
   public function moladim($months)
   {
     $this->days     = $months * DAYS_IN_MOLAD;
@@ -80,6 +80,8 @@ class Molad {
     $this->adjust();
   }
 
+  // remove days that form whole weeks
+  // i.e. apply modulo 7
   public function sheerit()
   {
     $this->days %= DAYS_IN_WEEK;
@@ -91,6 +93,8 @@ class Molad {
   }
 
   // this is what is announced on shabbos mevarchim "המולד יהיה"
+  // basicallty, the same as the sheerit function,
+  // but shabbos is 7 instead of 0
   public function announced_molad()
   {
     $this->sheerit();
@@ -127,17 +131,5 @@ class Molad {
     $real_hour = $real_hour % 12 ?: 12;
 
     return $real_hour.":".($minutes < 10 ? ('0'.$minutes) : $minutes).' '.$am_pm;
-  }
-
-  public function shanim_pshutot($number_of_years)
-  {
-    $number_of_months = $number_of_years * 12;
-    $this->moladim($number_of_months);
-  }
-
-  public function shanim_meuvarot($number_of_years)
-  {
-    $number_of_months = $number_of_years * 13;
-    $this->moladim($number_of_months);
   }
 }
