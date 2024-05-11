@@ -13,61 +13,7 @@
     require_once('utils.php');
 
     $ezmolad   = new Molad();
-    $ezsheerit = new Sheerit();
-    $ezmonth   = new Month();
-    $ezyear    = new Year();
-    $ezmachzor = new Machzor();
   ?>
-  <h1><center>הלכות קידוש החודש להרמב"ם</center></h1>
-
-  <table class="table table-bordered table-striped w-auto">
-    <thead>
-      <tr>
-        <th></th>
-        <th></th>
-        <th>חודשים</th>
-        <th>ימים</th>
-        <th>שעות</th>
-        <th>חלקים</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php
-        $pshutot = $ezyear->shanim_pshutot(12);
-      ?>
-      <tr>
-        <td>פשוטות</td>
-        <td>12</td>
-        <td><?= $pshutot['months'] ?></td>
-        <td><?= $pshutot['days'] ?></td>
-        <td><?= $pshutot['hours'] ?></td>
-        <td><?= $pshutot['chalakim'] ?></td>
-      </tr>
-      <?php
-        $meuvarot = $ezyear->shanim_meuvarot(7);
-      ?>
-      <tr>
-        <td>מעוברות</td>
-        <td>7</td>
-        <td><?= $meuvarot['months'] ?></td>
-        <td><?= $meuvarot['days'] ?></td>
-        <td><?= $meuvarot['hours'] ?></td>
-        <td><?= $meuvarot['chalakim'] ?></td>
-      </tr>
-      <?php
-        $total = $ezmolad->sum($pshutot, $meuvarot);
-      ?>
-      <tr>
-        <td>סה"כ</td>
-        <td>19</td>
-        <td><?= $total['months'] ?></td>
-        <td><?= $total['days'] ?></td>
-        <td><?= $total['hours'] ?></td>
-        <td><?= $total['chalakim'] ?></td>
-      </tr>
-    </tbody>
-  </table>
-
   <table class="table table-bordered table-striped w-auto">
     <thead>
       <tr>

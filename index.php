@@ -15,7 +15,7 @@
   </h1>
 
   <ul class="list-group list-group-flush">
-    <li><a href="molad.php">חשבונות עם המולד</a></li>
+    <!-- <li><a href="molad.php">חשבונות עם המולד</a></li> -->
     <li><a href="perek6.php">פרק ו</a></li>
   </ul>
 </body>

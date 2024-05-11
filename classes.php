@@ -40,17 +40,26 @@ class Molad {
     $this->adjust();
   }
 
-  // public function difference($moladim1, $moladim2)
   public function subtract($molad) // the molad passed in is assumed to be smaller
   {
     // instead of making sure the numbers in moladim1 are large enough by "borrowing",
-    // convert days and hours to chalakim. The adjust function will later fix things
+    // convert days and hours to chalakim. Then adjust function will later fix things
     $molad->chalakim += (($molad->days * HOURS_IN_DAY) + $molad->hours) * CHALAKIM_IN_HOUR;
     $molad->days      = $molad->hours = 0;
 
     $this->chalakim  += (($this->days * HOURS_IN_DAY) + $this->hours) * CHALAKIM_IN_HOUR;
     $this->days       = $this->hours  = 0;
     $this->chalakim  -= $molad->chalakim;
+
+    $this->adjust();
+  }
+
+  public function multiply($factor)
+  {
+    // convert days and hours to chalakim. Then adjust function will later fix things
+    $this->chalakim += (($this->days * HOURS_IN_DAY) + $this->hours) * CHALAKIM_IN_HOUR;
+    $this->days      = $this->hours = 0;
+    $this->chalakim  *= $factor;
 
     $this->adjust();
   }
@@ -117,5 +126,17 @@ class Molad {
     $real_hour = $real_hour % 12 ?: 12;
 
     return $real_hour.":".($minutes < 10 ? ('0'.$minutes) : $minutes).' '.$am_pm;
+  }
+
+  public function shanim_pshutot($number_of_years)
+  {
+    $number_of_months = $number_of_years * 12;
+    $this->moladim($number_of_months);
+  }
+
+  public function shanim_meuvarot($number_of_years)
+  {
+    $number_of_months = $number_of_years * 13;
+    $this->moladim($number_of_months);
   }
 }

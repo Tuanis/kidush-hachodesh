@@ -25,6 +25,9 @@
     <a href="#6-6">הלכה ו</a>&ThickSpace;
     <a href="#6-7">הלכה ז</a>&ThickSpace;
     <a href="#6-8">הלכה ח</a>&ThickSpace;
+    <a href="#6-9">הלכה ט</a>&ThickSpace;
+    <a href="#6-10">הלכה י</a>&ThickSpace;
+    <a href="#6-11">הלכה יא</a>&ThickSpace;
 
     <?php
     #region Halacha 1
@@ -196,7 +199,7 @@
       <?php
         $solar_year = new Molad(365, 6);
         $lunar_year = new Molad();
-        $lunar_year->moladim(12);
+        $lunar_year->shanim_pshutot(1);
       ?>
       <tr>
         <td>שנת החמה</td>
@@ -211,13 +214,14 @@
         <td><?= $lunar_year->chalakim ?></td>
       </tr>
       <?php
-        $solar_year->subtract($lunar_year);
+        $difference = clone $solar_year;
+        $difference->subtract($lunar_year);
       ?>
       <tr class="total">
         <td>תוספת</td>
-        <td><?= $solar_year->days ?></td>
-        <td><?= $solar_year->hours ?></td>
-        <td><?= $solar_year->chalakim ?></td>
+        <td><?= $difference->days ?></td>
+        <td><?= $difference->hours ?></td>
+        <td><?= $difference->chalakim ?></td>
       </tr>
       </tbody>
     </table>
@@ -378,7 +382,7 @@
     #region Halacha 8
   ?>
   <h3 id="6-8">הלכה ח</h3>
-  <p>וכן כשיהיה עמך ידוע מולד שנה זו, ותוסיף שאריתה על ימי המולד –אם פשוטה היא שארית הפשוטה, ואם מעוברת היא שארית המעוברת– יצא לך מולד שנה שלאחריה. וכן שנה אחר שנה, עד סוף העולם.</p>
+  <p>וכן כשיהיה עמך ידוע מולד שנה זו, ותוסיף שאריתה על ימי המולד; אם פשוטה היא שארית הפשוטה, ואם מעוברת היא שארית המעוברת. יצא לך מולד שנה שלאחריה. וכן שנה אחר שנה, עד סוף העולם.</p>
   <div class="row row-cols-auto">
     <div class="col">
       <table class="table table-bordered table-striped w-auto">
@@ -398,7 +402,7 @@
           <td>1057</td>
         </tr>
         <?php
-          $sheerit->moladim(12);
+          $sheerit->shanim_pshutot(1);
           $sheerit->sheerit();
         ?>
         <tr>
@@ -447,7 +451,7 @@
           <td>468</td>
         </tr>
         <?php
-          $sheerit->moladim(13);
+          $sheerit->shanim_meuvarot(1);
           $sheerit->sheerit();
         ?>
         <tr>
@@ -488,6 +492,127 @@
   ?>
   <h3 id="6-9">הלכה ט</h3>
   <p>בכל החשבונות האלו שתדע מהן המולד, כשתוסיף שארית עם שארית: כשיתקבץ מן החלקים אלף ושמנים, תשליך שעה אחת ותוסיף אותו למנין השעות; וכשיתקבץ מן השעות ארבע ועשרים, תשליך יום ותוסיף ממנו למנין הימים; וכשיתקבץ מן הימים יותר על שבעה, תשליך שבעה מן המנין ותניח השאר. שאין אנו מחשבין לידע מניין הימים; אלא לידע באי זה יום מימי השבוע, ובאי זה שעה, ואי זה חלק יהיה המולד.</p>
+  <?php
+    #endregion
+    #region Halacha 10
+  ?>
+  <h3 id="6-10">הלכה י</h3>
+  <p>כל תשע עשרה שנה שיהיו מהן שבע שנים מעוברות וי"ב פשוטות נקרא <b>מחזור</b>. ולמה סמכנו על מנין זה? שבזמן שאתה מקבץ מנין ימי י"ב שנה פשוטות ושבע מעוברות ושעותיהן וחלקיהן, ותשליך כל אלף ושמנים חלקים שעה, וכל ארבע ועשרים שעות יום, ותוסיף למנין הימים&hellip;</p>
+  <table class="table table-bordered table-striped w-auto">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th>ימים</th>
+        <th>שעות</th>
+        <th>חלקים</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+        $num_pshutot = 12;
+        $months_pshuta = 12;
+        $pshutot = new Molad();
+        $pshutot->shanim_pshutot($num_pshutot);
+      ?>
+      <tr>
+        <td>פשוטות</td>
+        <td><?= $num_pshutot; ?></td>
+        <td><?= $pshutot->days; ?></td>
+        <td><?= $pshutot->hours; ?></td>
+        <td><?= $pshutot->chalakim; ?></td>
+      </tr>
+      <?php
+        $num_meuvarot = 7;
+        $months_meuveret = 13;
+        $meuvarot = new Molad();
+        $meuvarot->shanim_meuvarot($num_meuvarot);
+      ?>
+      <tr>
+        <td>מעוברות</td>
+        <td><?= $num_meuvarot; ?></td>
+        <td><?= $meuvarot->days; ?></td>
+        <td><?= $meuvarot->hours; ?></td>
+        <td><?= $meuvarot->chalakim; ?></td>
+      </tr>
+      <?php
+        $total_lunar = clone $pshutot;
+        $total_lunar->add($meuvarot);
+      ?>
+      <tr class="total">
+        <td>סה"כ</td>
+        <td><?= $num_pshutot + $num_meuvarot; ?></td>
+        <td><?= $total_lunar->days; ?></td>
+        <td><?= $total_lunar->hours; ?></td>
+        <td><?= $total_lunar->chalakim; ?></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>תמצא הכל תשע עשרה שנה משני החמה, שכל שנה מהן שלש מאות וחמשה וששים (365) יום ושש שעות בשוה.</p>
+  <table class="table table-bordered table-striped w-auto">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th>ימים</th>
+        <th>שעות</th>
+        <th>חלקים</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+        $solar_years = clone $solar_year;
+        $solar_years->multiply(19);
+      ?>
+      <tr>
+        <td>שנות חמה</td>
+        <td>19</td>
+        <td><?= $solar_years->days; ?></td>
+        <td><?= $solar_years->hours; ?></td>
+        <td><?= $solar_years->chalakim; ?></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>ולא ישאר ממנין ימי החמה בכל תשע עשרה שנה חוץ משעה אחת, וארבע מאות ושמנים וחמשה (485) חלקים. סימן להם אתפ"ה.</p>
+  <table class="table table-bordered table-striped w-auto">
+    <thead>
+      <tr>
+        <th></th>
+        <th>ימים</th>
+        <th>שעות</th>
+        <th>חלקים</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>שנות חמה</td>
+        <td><?= $solar_years->days; ?></td>
+        <td><?= $solar_years->hours; ?></td>
+        <td><?= $solar_years->chalakim; ?></td>
+      </tr>
+      <tr>
+        <td>שנות מחזור</td>
+        <td><?= $total_lunar->days; ?></td>
+        <td><?= $total_lunar->hours; ?></td>
+        <td><?= $total_lunar->chalakim; ?></td>
+      </tr>
+      <?php
+        $solar_years->subtract($total_lunar);
+      ?>
+      <tr class="total">
+        <td>הפרש</td>
+        <td><?= $solar_years->days; ?></td>
+        <td><?= $solar_years->hours; ?></td>
+        <td><?= $solar_years->chalakim; ?></td>
+      </tr>
+    </tbody>
+  </table>
+  <?php
+    #endregion
+    #region Halacha 11
+  ?>
+  <h3 id="6-11">הלכה יא</h3>
+  <p>נמצא במחזור שהוא כזה, החדשים כולם חדשי הלבנה והשנים שני החמה. והשבע שנים המעוברות שבכל מחזור ומחזור לפי חשבון זה הם: שנה שלישית מן המחזור, וששית, ושמינית, ושנת אחת עשרה, ושנת ארבע עשרה, ושנת שבע עשרה, ושנת תשע עשרה. סימן להם גו"ח י"א י"ד י"ז י"ט.</p>
   <?php
     #endregion
   ?>    
