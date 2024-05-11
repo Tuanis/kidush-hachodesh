@@ -44,12 +44,13 @@ class Molad {
   {
     // instead of making sure the numbers in moladim1 are large enough by "borrowing",
     // convert days and hours to chalakim. Then adjust function will later fix things
-    $molad->chalakim += (($molad->days * HOURS_IN_DAY) + $molad->hours) * CHALAKIM_IN_HOUR;
-    $molad->days      = $molad->hours = 0;
+    $clone = clone $molad;
+    $clone->chalakim += (($clone->days * HOURS_IN_DAY) + $clone->hours) * CHALAKIM_IN_HOUR;
+    $clone->days      = $clone->hours = 0;
 
     $this->chalakim  += (($this->days * HOURS_IN_DAY) + $this->hours) * CHALAKIM_IN_HOUR;
     $this->days       = $this->hours  = 0;
-    $this->chalakim  -= $molad->chalakim;
+    $this->chalakim  -= $clone->chalakim;
 
     $this->adjust();
   }
