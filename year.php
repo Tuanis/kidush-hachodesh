@@ -1,5 +1,6 @@
 <?php
-require_once('config.php');
+require_once 'config.php';
+require_once 'molad.php';
 
 class Year extends Molad
 {
@@ -41,5 +42,16 @@ class Year extends Molad
     $sheerit = Year::shana_meuveret();
     $sheerit->sheerit();
     return $sheerit;
+  }
+
+  public static function sheerit_machzor()
+  {
+    $meuvarot = Year::shana_meuveret();
+    $meuvarot->multiply(7);
+    $pshutot = Year::shana_pshuta();
+    $pshutot->multiply(12);
+    $meuvarot->add($pshutot);
+    $meuvarot->sheerit();
+    return $meuvarot;
   }
 }
