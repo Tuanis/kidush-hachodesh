@@ -19,7 +19,7 @@
   $first_molad->add($sheerit_machzor);
   $first_molad->add($sheerit_pshuta);
   $first_molad->add($sheerit_meuveret);
-  $first_molad->sheerit();
+  $first_molad->announced_molad();
 
   $translation = $first_molad->translate();
 
