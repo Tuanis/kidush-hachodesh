@@ -16,5 +16,6 @@
 
   <ul class="list-group list-group-flush">
     <li><a href="perek6.php">פרק ו</a></li>
+    <li><a href="perek7.php">פרק ז</a></li>
   </ul>
 </body>

@@ -9,19 +9,9 @@
   $sheerit_machzor  = Year::sheerit_machzor();
   $sheerit_pshuta   = Year::sheerit_shana_pshuta();
   $sheerit_meuveret = Year::sheerit_shana_meuveret();
+  $first_molad      = new Molad(2, 5, 204);            // baharad
 
-  $sheerit_machzor->multiply($machzorim);
-  $sheerit_pshuta->multiply($pshutot);
-  $sheerit_meuveret->multiply($meuvarot);
-
-  $first_molad = new Molad(2, 5, 204); // baharad
-
-  $first_molad->add($sheerit_machzor);
-  $first_molad->add($sheerit_pshuta);
-  $first_molad->add($sheerit_meuveret);
-  $first_molad->announced_molad();
-
-  $translation = $first_molad->translate();
+  $molad_rosh_hashana = Year::calculate_rosh_hashana($machzorim, $pshutot, $meuvarot);
 
   $json = json_encode(
     array(
@@ -41,11 +31,11 @@
         'chalakim' => $sheerit_meuveret->chalakim,
       ),
       'total' => array(
-        'days'     => $first_molad->days,
-        'hours'    => $first_molad->hours,
-        'chalakim' => $first_molad->chalakim,
+        'days'     => $molad_rosh_hashana->days,
+        'hours'    => $molad_rosh_hashana->hours,
+        'chalakim' => $molad_rosh_hashana->chalakim,
       ),
-      'translation' => $translation,
+      'translation' => $molad_rosh_hashana->translate(),
     )
   );
 

@@ -54,4 +54,50 @@ class Year extends Molad
     $meuvarot->sheerit();
     return $meuvarot;
   }
+
+  public static function molad_rosh_hashana ($year)
+  {
+    $have_passed = before_the_year($year);
+    $machzorim = $have_passed['machzorim'];
+    $meuvarot = $have_passed['meuvarot'];
+    $pshutot = $have_passed['pshutot'];
+
+    $is_year = $meuvarot + $pshutot;
+    $is_machzor = $machzorim + 1;
+
+    if ($is_year == YEARS_IN_MACHZOR)
+    {
+      $is_year = 1;
+      $is_machzor++;
+    }
+    else
+    {
+      $is_year++;
+    }
+
+    $molad_rosh_hashana = Year::calculate_rosh_hashana($machzorim, $pshutot, $meuvarot);
+    
+    return $molad_rosh_hashana;
+  }
+
+  public static function calculate_rosh_hashana($machzorim, $pshutot, $meuvarot)
+  {
+    $sheerit_machzor = Year::sheerit_machzor();
+    $sheerit_pshuta = Year::sheerit_shana_pshuta();
+    $sheerit_meuveret = Year::sheerit_shana_meuveret();
+
+    $sheerit_machzor->multiply($machzorim);
+    $sheerit_pshuta->multiply($pshutot);
+    $sheerit_meuveret->multiply($meuvarot);
+  
+    $first_molad = new Molad(2, 5, 204); // baharad
+  
+    $first_molad->add($sheerit_machzor);
+    $first_molad->add($sheerit_pshuta);
+    $first_molad->add($sheerit_meuveret);
+    
+    $first_molad->announced_molad();
+
+    return $first_molad;
+  }
 }

@@ -402,11 +402,15 @@
             </tr>
           </thead>
           <tbody>
+            <?php
+              $before_meuveret = most_recent_meuveret() - 1;
+              $molad = Year::molad_rosh_hashana($before_meuveret);
+            ?>
             <tr>
-              <td>תשרי תשס"ט:</td>
-              <td>3</td>
-              <td>7</td>
-              <td>1057</td>
+              <td>תשרי <?= $before_meuveret ?>:</td>
+              <td><?= $molad->days; ?></td>
+              <td><?= $molad->hours; ?></td>
+              <td><?= $molad->chalakim; ?></td>
             </tr>
             <tr>
               <td>שארית שנה פשוטה:</td>
@@ -415,19 +419,16 @@
               <td><?= $sheerit_pshuta->chalakim ?></td>
             </tr>
             <?php
-            //todo: use a file that calls function most_recent_meuveret()
-            $molad = new Molad(3, 7, 1057);
-            $molad->add($sheerit_pshuta);
-            $molad->announced_molad();
-
-            $translation = $molad->translate();
+              $molad->add($sheerit_pshuta);
+              $molad->announced_molad();
             ?>
             <tr class="total">
-              <td>תשרי תש"ע:</td>
+              <td>תשרי <?= $before_meuveret + 1 ?>:</td>
               <td><?= $molad->days; ?></td>
               <td><?= $molad->hours; ?></td>
               <td><?= $molad->chalakim; ?></td>
             </tr>
+            <?php $translation = $molad->translate(); ?>
             <tr>
               <td>תרגומו:</td>
               <td><?= $translation['day']; ?></td>
@@ -449,10 +450,10 @@
           </thead>
           <tbody>
             <tr>
-              <td>תשרי תשס"ח:</td>
-              <td>4</td>
-              <td>10</td>
-              <td>468</td>
+              <td>תשרי <?= $before_meuveret + 1 ?>:</td>
+              <td><?= $molad->days; ?></td>
+              <td><?= $molad->hours; ?></td>
+              <td><?= $molad->chalakim; ?></td>
             </tr>
             <tr>
               <td>שארית שנה מעוברת:</td>
@@ -461,18 +462,16 @@
               <td><?= $sheerit_meuveret->chalakim ?></td>
             </tr>
             <?php
-            $molad = new Molad(4, 10, 468);
-            $molad->add($sheerit_meuveret);
-            $molad->announced_molad();
-
-            $translation = $molad->translate();
+              $molad->add($sheerit_meuveret);
+              $molad->announced_molad();
             ?>
             <tr class="total">
-              <td>תשרי תשס"ט:</td>
+              <td>תשרי <?= $before_meuveret + 2 ?>:</td>
               <td><?= $molad->days; ?></td>
               <td><?= $molad->hours; ?></td>
               <td><?= $molad->chalakim; ?></td>
             </tr>
+            <?php $translation = $molad->translate(); ?>
             <tr>
               <td>תרגומו:</td>
               <td><?= $translation['day']; ?></td>
