@@ -16,3 +16,12 @@ tr.total
 {
   border-top: double;
 }
+
+div.raavad
+{
+  margin-right: 1rem;
+  border: solid darkgrey;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}

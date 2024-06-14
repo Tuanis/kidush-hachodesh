@@ -9,6 +9,10 @@
   $sheerit_machzor  = Year::sheerit_machzor();
   $sheerit_pshuta   = Year::sheerit_shana_pshuta();
   $sheerit_meuveret = Year::sheerit_shana_meuveret();
+  $sheerit_machzor->multiply($machzorim);
+  $sheerit_pshuta->multiply($pshutot);
+  $sheerit_meuveret->multiply($meuvarot);
+
   $first_molad      = new Molad(2, 5, 204);            // baharad
 
   $molad_rosh_hashana = Year::calculate_rosh_hashana($machzorim, $pshutot, $meuvarot);

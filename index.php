@@ -19,3 +19,4 @@
     <li><a href="perek7.php">פרק ז</a></li>
   </ul>
 </body>
+</html>
