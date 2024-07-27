@@ -12,11 +12,14 @@ p.explanation
   background-color: lightgray;
   border: 1px solid gray;
 }
+ol
+{
+  list-style-type: hebrew;
+}
 tr.total
 {
   border-top: double;
 }
-
 div.raavad
 {
   margin-right: 1rem;
@@ -24,4 +27,17 @@ div.raavad
   padding-top: 5px;
   padding-left: 5px;
   padding-right: 5px;
+}
+table.calendar-table {
+  table-layout: fixed;
+  width: auto;
+  max-width: 100%;
+}
+table.calendar-table th,
+table.calendar-table td {
+  width: 14.28%; /* 100% / 7 days */
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
