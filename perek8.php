@@ -100,6 +100,50 @@
       <li><p class="mb-0">ואם תמצא ביניהם <b>חמשה</b> ימים יהיו <b>כסדרן</b>.</p></li>
       <li><p class="mb-0">ואם תמצא ביניהם <b>ששה</b> יהיו <b>שלמים</b>.</p></li>
     </ol>
+    <table class="table table-bordered table-striped w-auto text-center">
+      <thead>
+        <tr>
+          <th></th>
+          <th>מספר ימים</th>
+          <th>בין ר"ה לר"ה</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="3">פשוטות</td>
+          <td>353</td>
+          <td>2</td>
+          <td>חסרה</td>
+        </tr>
+        <tr>
+          <td>354</td>
+          <td>3</td>
+          <td>כסדרה</td>
+        </tr>
+        <tr>
+          <td>355</td>
+          <td>4</td>
+          <td>שלמה</td>
+        </tr>
+        <tr>
+          <td rowspan="3">מעוברות</td>
+          <td>383</td>
+          <td>4</td>
+          <td>חסרה</td>
+        </tr>
+        <tr>
+          <td>384</td>
+          <td>5</td>
+          <td>כסדרה</td>
+        </tr>
+        <tr>
+          <td>385</td>
+          <td>6</td>
+          <td>שלמה</td>
+        </tr>
+      </tbody>
+    </table>
 
     <?php
     #endregion
