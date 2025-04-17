@@ -9,9 +9,6 @@
 </head>
 
 <body lang="he_IL" dir="rtl">
-  <?php
-
-  ?>
   <a href="javascript:window.history.back();"><i class="fas fa-arrow-alt-circle-right" style="font-size: 24px; color: #337ab7;"></i></a>
   <div class="container">
     <h1>

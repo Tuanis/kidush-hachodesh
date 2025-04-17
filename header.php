@@ -7,3 +7,19 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=David+Libre&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="kidush.css">
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],    // Use $...$ for inline math
+        displayMath: [['$$', '$$']], // $$...$$ for displayed equations
+        packages: {'[+]': ['html']}  // Enable HTML extensions
+      },
+      options: {
+        enableMenu: false            // Disable right-click menu
+      },
+      chtml: {
+        displayAlign: 'right'        // Align equations to the right (for RTL)
+      }
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js" integrity="sha512-T8xxpazDtODy3WOP/c6hvQI2O9UPdARlDWE0CvH1Cfqc0TXZF6GZcEKL7tIR8VbfS/7s/J6C+VOqrD6hIo++vQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
