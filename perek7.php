@@ -9,7 +9,7 @@
 </head>
 
 <body lang="he_IL" dir="rtl">
-  <a href="../"><i class="fas fa-arrow-alt-circle-up" style="font-size: 24px; color: #337ab7;" title="לתפריט הראשי"></i></a>
+  <a href="./"><i class="fas fa-arrow-alt-circle-up" style="font-size: 24px; color: #337ab7;" title="לתפריט הראשי"></i></a>
   <div class="container">
     <h1>
       <center>הלכות קידוש החודש להרמב"ם</center>
