@@ -9,7 +9,7 @@
 </head>
 
 <body lang="he_IL" dir="rtl">
-  <a href="javascript:window.history.back();"><i class="fas fa-arrow-alt-circle-right" style="font-size: 24px; color: #337ab7;"></i></a>
+  <a href="../"><i class="fas fa-arrow-alt-circle-up" style="font-size: 24px; color: #337ab7;" title="לתפריט הראשי"></i></a>
   <div class="container">
     <h1>
       <center>הלכות קידוש החודש להרמב"ם</center>
@@ -200,5 +200,8 @@
     <?php
     #endregion
     ?>
+  </div>
 
+  <a href="/perek10.php" style="pointer-events: none;"><i class="fas fa-arrow-alt-circle-left float-start" style="font-size: 24px; color: #337ab7; opacity: 0.5;"></i></a>
+  <a href="/perek8.php"><i class="fas fa-arrow-alt-circle-right float-end" style="font-size: 24px; color: #337ab7;"></i></a>
 </body>

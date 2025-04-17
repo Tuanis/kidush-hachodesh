@@ -22,7 +22,7 @@
   $sheerit_meuveret = Year::sheerit_shana_meuveret();
 
   ?>
-  <a href="javascript:window.history.back();"><i class="fas fa-arrow-alt-circle-right" style="font-size: 24px; color: #337ab7;"></i></a>
+  <a href="../"><i class="fas fa-arrow-alt-circle-up" style="font-size: 24px; color: #337ab7;" title="לתפריט הראשי"></i></a>
   <div class="container">
     <h1>
       <center>הלכות קידוש החודש להרמב"ם</center>
@@ -784,7 +784,8 @@
     <?php
     #endregion
     ?>
-
+  </div>
+  <a href="/perek7.php"><i class="fas fa-arrow-alt-circle-left float-start" style="font-size: 24px; color: #337ab7;" title="לפרק הבא"></i></a>
 </body>
 <script type="text/javascript">
   function calculate_next_month() {
