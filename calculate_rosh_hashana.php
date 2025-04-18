@@ -43,4 +43,4 @@
     )
   );
 
-  echo $json;
+  print $json;

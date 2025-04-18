@@ -9,6 +9,19 @@
 </head>
 
 <body lang="he_IL" dir="rtl">
+  <?php
+  require_once 'utils.php';
+  require_once 'molad.php';
+  require_once 'year.php';
+
+  $ib_tashtzag      = Molad::ib_tashtzag();
+  $solar_year       = new Molad(365, 6);
+  $shana_pshuta     = Year::shana_pshuta();
+  $shana_meuveret   = Year::shana_meuveret();
+  $sheerit_pshuta   = Year::sheerit_shana_pshuta();
+  $sheerit_meuveret = Year::sheerit_shana_meuveret();
+
+  ?>
   <a href="./"><i class="fas fa-arrow-alt-circle-up" style="font-size: 24px; color: #337ab7;" title="לתפריט הראשי"></i></a>
   <div class="container">
     <h1>

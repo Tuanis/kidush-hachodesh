@@ -23,8 +23,8 @@ function getJSConstants()
     'LEAP_YEARS'         => json_encode(LEAP_YEARS),
   ];
 
-  echo '<script>';
+  print '<script>';
   foreach ($constants as $key => $value)
-    echo 'const ' . $key . ' = ' . $value . ';';
-  echo '</script>';
+    print 'const ' . $key . ' = ' . $value . ';';
+  print '</script>';
 }

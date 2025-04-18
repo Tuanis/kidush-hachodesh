@@ -22,4 +22,4 @@
     )
   );
 
-  echo $json;
+  print $json;

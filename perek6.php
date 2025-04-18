@@ -70,7 +70,7 @@
           <tbody>
             <?php
             for ($minute = 1; $minute <= 10; $minute++)
-              echo '<tr><td>' . $minute . '</td><td>' . $minute * CHALAKIM_IN_MINUTE . '</td></tr>';
+              print '<tr><td>' . $minute . '</td><td>' . $minute * CHALAKIM_IN_MINUTE . '</td></tr>';
             ?>
           </tbody>
         </table>
@@ -86,7 +86,7 @@
           <tbody>
             <?php
             for ($minute = 11; $minute <= 20; $minute++)
-              echo '<tr><td>' . $minute . '</td><td>' . $minute * CHALAKIM_IN_MINUTE . '</td></tr>';
+              print '<tr><td>' . $minute . '</td><td>' . $minute * CHALAKIM_IN_MINUTE . '</td></tr>';
             ?>
           </tbody>
         </table>
@@ -102,7 +102,7 @@
           <tbody>
             <?php
             for ($minute = 21; $minute <= 30; $minute++)
-              echo '<tr><td>' . $minute . '</td><td>' . $minute * CHALAKIM_IN_MINUTE . '</td></tr>';
+              print '<tr><td>' . $minute . '</td><td>' . $minute * CHALAKIM_IN_MINUTE . '</td></tr>';
             ?>
           </tbody>
         </table>
@@ -118,7 +118,7 @@
           <tbody>
             <?php
             for ($minute = 31; $minute <= 40; $minute++)
-              echo '<tr><td>' . $minute . '</td><td>' . $minute * CHALAKIM_IN_MINUTE . '</td></tr>';
+              print '<tr><td>' . $minute . '</td><td>' . $minute * CHALAKIM_IN_MINUTE . '</td></tr>';
             ?>
           </tbody>
         </table>
@@ -134,7 +134,7 @@
           <tbody>
             <?php
             for ($minute = 41; $minute <= 50; $minute++)
-              echo '<tr><td>' . $minute . '</td><td>' . $minute * CHALAKIM_IN_MINUTE . '</td></tr>';
+              print '<tr><td>' . $minute . '</td><td>' . $minute * CHALAKIM_IN_MINUTE . '</td></tr>';
             ?>
           </tbody>
         </table>
@@ -150,7 +150,7 @@
           <tbody>
             <?php
             for ($minute = 51; $minute <= 60; $minute++)
-              echo '<tr><td>' . $minute . '</td><td>' . $minute * CHALAKIM_IN_MINUTE . '</td></tr>';
+              print '<tr><td>' . $minute . '</td><td>' . $minute * CHALAKIM_IN_MINUTE . '</td></tr>';
             ?>
           </tbody>
         </table>
@@ -196,7 +196,7 @@
         for ($months = 1; $months <= 13; $months++)
         {
           $month->moladim($months);
-          echo '<tr><td>' . $months . '</td><td>' . $month->days . '</td><td>' . $month->hours . '</td><td>' . $month->chalakim . '</td></tr>';
+          print '<tr><td>' . $months . '</td><td>' . $month->days . '</td><td>' . $month->hours . '</td><td>' . $month->chalakim . '</td></tr>';
         }
         ?>
       </tbody>
@@ -260,25 +260,25 @@
         $sheerit = new Molad();
         foreach ([1, 12, 13] as $months)
         {
-          echo '<tr>';
+          print '<tr>';
           $sheerit->moladim($months);
           $sheerit->sheerit();
           switch ($months)
           {
             case 1:
-              echo '<td>' . 'שארית חודש' . '</td>';
+              print '<td>' . 'שארית חודש' . '</td>';
               $remez = 'אי"ב תשצ"ג';
               break;
             case 12:
-              echo '<td>' . 'שארית שנה פשוטה' . '</td>';
+              print '<td>' . 'שארית שנה פשוטה' . '</td>';
               $remez = 'ד"ח תתע"ו';
               break;
             case 13:
-              echo '<td>' . 'שארית שנה מעוברת' . '</td>';
+              print '<td>' . 'שארית שנה מעוברת' . '</td>';
               $remez = 'הכ"א תקפ"ט';
               break;
           }
-          echo '<td>' . $sheerit->days . '</td><td>' . $sheerit->hours . '</td><td>' . $sheerit->chalakim . '</td><td>' . $remez . '</td></tr>';
+          print '<td>' . $sheerit->days . '</td><td>' . $sheerit->hours . '</td><td>' . $sheerit->chalakim . '</td><td>' . $remez . '</td></tr>';
         }
         ?>
       </tbody>
