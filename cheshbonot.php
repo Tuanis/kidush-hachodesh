@@ -30,9 +30,9 @@
     ?>
     <tr>
       <td>שארית מחזור</td>
-      <td><?= $sheerit_machzor['days'] ?></td>
-      <td><?= $sheerit_machzor['hours'] ?></td>
-      <td><?= $sheerit_machzor['chalakim'] ?></td>
+      <td><?= $sheerit_machzor['days']; ?></td>
+      <td><?= $sheerit_machzor['hours']; ?></td>
+      <td><?= $sheerit_machzor['chalakim']; ?></td>
       <td>בי"ו תקצ"ה</td>
     </tr>
     </tbody>
@@ -64,12 +64,12 @@
         $machzor_gadol = $ezmachzor->get_machzor_gadol_info($year);
     ?>
       <tr>
-        <td <?= ($year == $this_year) ? 'class="text-decoration-underline"' : '' ?>'><?= $year ?></td>
-        <td><?= $machzor_katan['year'] ?></td>
-        <td><?= $machzor_katan['machzor'] ?></td>
-        <td><?= $machzor_gadol['year'] ?></td>
-        <td><?= $machzor_gadol['machzor'] ?></td>
-        <td><?= $is_meuveret ? 'כן' : 'לא' ?></td>
+        <td <?= ($year == $this_year) ? 'class="text-decoration-underline"' : ''; ?>'><?= $year; ?></td>
+        <td><?= $machzor_katan['year']; ?></td>
+        <td><?= $machzor_katan['machzor']; ?></td>
+        <td><?= $machzor_gadol['year']; ?></td>
+        <td><?= $machzor_gadol['machzor']; ?></td>
+        <td><?= $is_meuveret ? 'כן' : 'לא'; ?></td>
       </tr>
     <?php
       }

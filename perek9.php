@@ -72,7 +72,24 @@
     <p class="mb-0">ותקופת <b>תשרי</b> היות השמש בראש מזל <b>מאזנים</b>.</p>
     <p class="mb-0">ותקופת <b>טבת</b> היות השמש בראש מזל <b>גדי</b>.</p>
     <p>ותקופת ניסן היתה בשנה הראשונה של יצירה לפי חשבון זה, קודם מולד ניסן בשבעה ימים ותשע שעות ותרמ"ב (642) חלקים. סימנה ז"ט תרמ"ב.</p>
-
+    
+    <table class="table table-bordered table-striped w-auto">
+      <thead>
+        <tr>
+          <th></th>
+          <th>ימים</th>
+          <th>שעות</th>
+          <th>חלקים</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>אי"ב תשצ"ג:</td>
+        <td><?= $ib_tashtzag->days; ?></td>
+        <td><?= $ib_tashtzag->hours; ?></td>
+        <td><?= $ib_tashtzag->chalakim; ?></td>
+      </tr>
+      </tbody>
+    </table>
     <?php
     #endregion
     #region Halacha 5

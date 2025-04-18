@@ -173,7 +173,7 @@
     $minutes = (int)$minutes_float;
     $seconds = ($minutes_float - $minutes) * 60;
     ?>
-    <p class="explanation p-2">חז"ל קיבלו שהמולד קורה בממוצע כל 29 יום, 12 שעות, 793 חלקים. דהיינו כל <?= $molad ?> ימים.<br>שים לב בטבלאות בהלכה ב', איפה נמצא החלק 793&hellip;<br>793 חלקים = <?= $minutes ?> דקות + 1 חלק = <?= number_format($minutes_float, 4) ?> דקות = <?= $minutes ?> דקות + <?= number_format($seconds, 2) ?> שניות</p>
+    <p class="explanation p-2">חז"ל קיבלו שהמולד קורה בממוצע כל 29 יום, 12 שעות, 793 חלקים. דהיינו כל <?= $molad; ?> ימים.<br>שים לב בטבלאות בהלכה ב', איפה נמצא החלק 793&hellip;<br>793 חלקים = <?= $minutes; ?> דקות + 1 חלק = <?= number_format($minutes_float, 4); ?> דקות = <?= $minutes; ?> דקות + <?= number_format($seconds, 2); ?> שניות</p>
     <?php
     #endregion
     #region Halacha 4
@@ -216,15 +216,15 @@
       <tbody>
         <tr>
           <td>שנת החמה</td>
-          <td><?= $solar_year->days ?></td>
-          <td><?= $solar_year->hours ?></td>
-          <td><?= $solar_year->chalakim ?></td>
+          <td><?= $solar_year->days; ?></td>
+          <td><?= $solar_year->hours; ?></td>
+          <td><?= $solar_year->chalakim; ?></td>
         </tr>
         <tr>
           <td>שנת הלבנה</td>
-          <td><?= $shana_pshuta->days ?></td>
-          <td><?= $shana_pshuta->hours ?></td>
-          <td><?= $shana_pshuta->days ?></td>
+          <td><?= $shana_pshuta->days; ?></td>
+          <td><?= $shana_pshuta->hours; ?></td>
+          <td><?= $shana_pshuta->days; ?></td>
         </tr>
         <?php
         $difference = clone $solar_year;
@@ -232,9 +232,9 @@
         ?>
         <tr class="total">
           <td>תוספת</td>
-          <td><?= $difference->days ?></td>
-          <td><?= $difference->hours ?></td>
-          <td><?= $difference->chalakim ?></td>
+          <td><?= $difference->days; ?></td>
+          <td><?= $difference->hours; ?></td>
+          <td><?= $difference->chalakim; ?></td>
         </tr>
       </tbody>
     </table>
@@ -308,9 +308,9 @@
         </tr>
         <tr>
           <td>אי"ב תשצ"ג:</td>
-          <td><?= $ib_tashtzag->days ?></td>
-          <td><?= $ib_tashtzag->hours ?></td>
-          <td><?= $ib_tashtzag->chalakim ?></td>
+          <td><?= $ib_tashtzag->days; ?></td>
+          <td><?= $ib_tashtzag->hours; ?></td>
+          <td><?= $ib_tashtzag->chalakim; ?></td>
         </tr>
         <tr class="total">
           <td>חודש הבא:</td>
@@ -356,9 +356,9 @@
         </tr>
         <tr>
           <td>אי"ב תשצ"ג:</td>
-          <td><?= $ib_tashtzag->days ?></td>
-          <td><?= $ib_tashtzag->hours ?></td>
-          <td><?= $ib_tashtzag->chalakim ?></td>
+          <td><?= $ib_tashtzag->days; ?></td>
+          <td><?= $ib_tashtzag->hours; ?></td>
+          <td><?= $ib_tashtzag->chalakim; ?></td>
           <td></td>
         </tr>
         <?php
@@ -407,23 +407,23 @@
               $molad = Year::molad_rosh_hashana($before_meuveret);
             ?>
             <tr>
-              <td>תשרי <?= $before_meuveret ?>:</td>
+              <td>תשרי <?= $before_meuveret; ?>:</td>
               <td><?= $molad->days; ?></td>
               <td><?= $molad->hours; ?></td>
               <td><?= $molad->chalakim; ?></td>
             </tr>
             <tr>
               <td>שארית שנה פשוטה:</td>
-              <td><?= $sheerit_pshuta->days ?></td>
-              <td><?= $sheerit_pshuta->hours ?></td>
-              <td><?= $sheerit_pshuta->chalakim ?></td>
+              <td><?= $sheerit_pshuta->days; ?></td>
+              <td><?= $sheerit_pshuta->hours; ?></td>
+              <td><?= $sheerit_pshuta->chalakim; ?></td>
             </tr>
             <?php
               $molad->add($sheerit_pshuta);
               $molad->announced_molad();
             ?>
             <tr class="total">
-              <td>תשרי <?= $before_meuveret + 1 ?>:</td>
+              <td>תשרי <?= $before_meuveret + 1; ?>:</td>
               <td><?= $molad->days; ?></td>
               <td><?= $molad->hours; ?></td>
               <td><?= $molad->chalakim; ?></td>
@@ -450,23 +450,23 @@
           </thead>
           <tbody>
             <tr>
-              <td>תשרי <?= $before_meuveret + 1 ?>:</td>
+              <td>תשרי <?= $before_meuveret + 1; ?>:</td>
               <td><?= $molad->days; ?></td>
               <td><?= $molad->hours; ?></td>
               <td><?= $molad->chalakim; ?></td>
             </tr>
             <tr>
               <td>שארית שנה מעוברת:</td>
-              <td><?= $sheerit_meuveret->days ?></td>
-              <td><?= $sheerit_meuveret->hours ?></td>
-              <td><?= $sheerit_meuveret->chalakim ?></td>
+              <td><?= $sheerit_meuveret->days; ?></td>
+              <td><?= $sheerit_meuveret->hours; ?></td>
+              <td><?= $sheerit_meuveret->chalakim; ?></td>
             </tr>
             <?php
               $molad->add($sheerit_meuveret);
               $molad->announced_molad();
             ?>
             <tr class="total">
-              <td>תשרי <?= $before_meuveret + 2 ?>:</td>
+              <td>תשרי <?= $before_meuveret + 2; ?>:</td>
               <td><?= $molad->days; ?></td>
               <td><?= $molad->hours; ?></td>
               <td><?= $molad->chalakim; ?></td>
@@ -723,9 +723,9 @@
         </tr>
         <tr>
           <td>שארית שנה פשוטה:</td>
-          <td id="pshutot_days"><?= $sheerit_pshuta->days ?></td>
-          <td id="pshutot_hours"><?= $sheerit_pshuta->hours ?></td>
-          <td id="pshutot_chalakim"><?= $sheerit_pshuta->chalakim ?></td>
+          <td id="pshutot_days"><?= $sheerit_pshuta->days; ?></td>
+          <td id="pshutot_hours"><?= $sheerit_pshuta->hours; ?></td>
+          <td id="pshutot_chalakim"><?= $sheerit_pshuta->chalakim; ?></td>
           <td id="pshutot_times" style="background-color:unset;background-image:unset;border:unset;font-weight:normal;"></td>
           <td id="pshutot_days_total"></td>
           <td id="pshutot_hours_total"></td>
@@ -733,9 +733,9 @@
         </tr>
         <tr>
           <td>שארית שנה מעוברת:</td>
-          <td id="meuvarot_days"><?= $sheerit_meuveret->days ?></td>
-          <td id="meuvarot_hours"><?= $sheerit_meuveret->hours ?></td>
-          <td id="meuvarot_chalakim"><?= $sheerit_meuveret->chalakim ?></td>
+          <td id="meuvarot_days"><?= $sheerit_meuveret->days; ?></td>
+          <td id="meuvarot_hours"><?= $sheerit_meuveret->hours; ?></td>
+          <td id="meuvarot_chalakim"><?= $sheerit_meuveret->chalakim; ?></td>
           <td id="meuvarot_times" style="background-color:unset;background-image:unset;border:unset;font-weight:normal;"></td>
           <td id="meuvarot_days_total"></td>
           <td id="meuvarot_hours_total"></td>
