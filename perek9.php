@@ -14,13 +14,6 @@
   require_once 'molad.php';
   require_once 'year.php';
 
-  $ib_tashtzag      = Molad::ib_tashtzag();
-  $solar_year       = new Molad(365, 6);
-  $shana_pshuta     = Year::shana_pshuta();
-  $shana_meuveret   = Year::shana_meuveret();
-  $sheerit_pshuta   = Year::sheerit_shana_pshuta();
-  $sheerit_meuveret = Year::sheerit_shana_meuveret();
-
   ?>
   <a href="./"><i class="fas fa-arrow-alt-circle-up" style="font-size: 24px; color: #337ab7;" title="לתפריט הראשי"></i></a>
   <div class="container">
@@ -39,6 +32,7 @@
     <a href="#9-6">הלכה ו</a>&ThickSpace;
     <a href="#9-7">הלכה ז</a>&ThickSpace;
     <a href="#9-8">הלכה ח</a>&ThickSpace;
+    <a href="#9-Cheshbonot">חשבונות</a>&ThickSpace;
 
     <?php
     #region Halacha 1
@@ -80,14 +74,75 @@
           <th>ימים</th>
           <th>שעות</th>
           <th>חלקים</th>
+          <th></th>
         </tr>
       </thead>
-      <tr>
-        <td>אי"ב תשצ"ג:</td>
-        <td><?= $ib_tashtzag->days; ?></td>
-        <td><?= $ib_tashtzag->hours; ?></td>
-        <td><?= $ib_tashtzag->chalakim; ?></td>
-      </tr>
+      <tbody>
+        <tr>
+          <?php
+            $baharad = new Molad(2, 5, 204);
+          ?>
+          <td>מולד תשרי הראשון:</td>
+          <td><?= $baharad->days; ?></td>
+          <td><?= $baharad->hours; ?></td>
+          <td><?= $baharad->chalakim; ?></td>
+          <td>[<a href="/perek6.php#6-8">פ"ו ה"ח</a>]</td>
+        </tr>
+        <tr>
+          <?php
+            $months = new Molad();
+            $months_full = clone $months;
+            $months->moladim(6);
+            $months_full->moladim(6, false);
+          ?>
+          <td>6 חודשים:</td>
+          <td><?= $months->days; ?></td>
+          <td><?= $months->hours; ?></td>
+          <td><?= $months->chalakim; ?></td>
+          <td></td>
+        </tr>
+        <tr>
+          <?php
+            $molad = clone $baharad;
+            $molad_full = clone $molad;
+            $molad->add($months);
+            $molad_full->add($months_full, false);
+          ?>
+          <td>סה"כ:</td>
+          <td class="total"><?= $molad->days; ?></td>
+          <td class="total"><?= $molad->hours; ?></td>
+          <td class="total"><?= $molad->chalakim; ?></td>
+          <td></td>
+        </tr>
+        <tr>
+          <?php
+            $molad->sheerit();
+          ?>
+          <td>מולד ניסן הראשון:</td>
+          <td><?= $molad->days; ?></td>
+          <td><?= $molad->hours; ?></td>
+          <td><?= $molad->chalakim; ?></td>
+          <td></td>
+        </tr>
+        <tr>
+          <?php
+            $tkufat_nissan = new Molad(172, 0, 0); // 23 Adar
+            $molad_full->subtract($tkufat_nissan);
+            $tkufat_nissan->sheerit();
+          ?>
+          <td>תקופת ניסן:</td>
+          <td><?= $tkufat_nissan->days; ?></td>
+          <td><?= $tkufat_nissan->hours; ?></td>
+          <td><?= $tkufat_nissan->chalakim; ?></td>
+          <td>(תחילת יום רביעי כג אדר של שנה ראשונה)</td>
+        </tr>
+        <tr>
+          <td>מוקדם ב:</td>
+          <td class="total"><?= $molad_full->days; ?></td>
+          <td class="total"><?= $molad_full->hours; ?></td>
+          <td class="total"><?= $molad_full->chalakim; ?></td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
     <?php
@@ -229,9 +284,232 @@
 
     <?php
     #endregion
+    #region Chesbonot
+    ?>
+    <h3 id="9-Cheshbonot">חשבונות</h3>
+    <?php
+    $this_year = this_year();
+    ?>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">השנה</span>
+      </div>
+      <input id="the_year" type="number" min="1" max="9999" step="1" oninput="calculate_machzor()" placeholder="הכנס שנה" value="<?= $this_year; ?>" style="width: 60px; background-color: azure;">
+      <div class="input-group-prepend">
+        <span class="input-group-text">היא השנה</span>
+      </div>
+      <input id="is_year" type="text" style="width: 30px;" readonly>
+      <div class="input-group-prepend">
+        <span class="input-group-text">ממחזור קטן</span>
+      </div>
+      <input id="of_machzor" type="text" style="width: 40px;" readonly>
+    </div>
+
+    <table class="mb-3">
+      <thead>
+        <tr>
+          <th colspan="2">כבר עברו</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="w-25">מחזורים</td>
+          <td><input id="machzorim_passed" type="text" style="width: 40px;" readonly></td>
+        </tr>
+        <tr>
+          <td class="w-25">שנים פשוטות</td>
+          <td><input id="pshutot_passed" type="text" style="width: 40px;" readonly></td>
+        </tr>
+        <tr>
+          <td class="w-25">שנים מעוברות</td>
+          <td><input id="meuvarot_passed" type="text" style="width: 40px;" readonly></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-bordered table-striped w-auto">
+      <thead>
+        <tr>
+          <th></th>
+          <th>ימים</th>
+          <th>שעות</th>
+          <th>חלקים</th>
+          <th style="background-color:unset;background-image:unset;border:unset;font-weight:normal;">כפול</th>
+          <th>ימים</th>
+          <th>שעות</th>
+          <th>חלקים</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <?php
+            $sheerit_machzor = Year::sheerit_machzor();
+          ?>
+          <td>שארית מחזור:</td>
+          <td id="machzorim_days"><?= $sheerit_machzor->days; ?></td>
+          <td id="machzorim_hours"><?= $sheerit_machzor->hours; ?></td>
+          <td id="machzorim_chalakim"><?= $sheerit_machzor->chalakim; ?></td>
+          <td id="machzorim_times" style="background-color:unset;background-image:unset;border:unset;font-weight:normal;"></td>
+          <td id="machzorim_days_total"></td>
+          <td id="machzorim_hours_total"></td>
+          <td id="machzorim_chalakim_total"></td>
+        </tr>
+        <tr>
+          <?php
+            $sheerit_pshuta = Year::sheerit_shana_pshuta();
+          ?>
+          <td>שארית שנה פשוטה:</td>
+          <td id="pshutot_days"><?= $sheerit_pshuta->days; ?></td>
+          <td id="pshutot_hours"><?= $sheerit_pshuta->hours; ?></td>
+          <td id="pshutot_chalakim"><?= $sheerit_pshuta->chalakim; ?></td>
+          <td id="pshutot_times" style="background-color:unset;background-image:unset;border:unset;font-weight:normal;"></td>
+          <td id="pshutot_days_total"></td>
+          <td id="pshutot_hours_total"></td>
+          <td id="pshutot_chalakim_total"></td>
+        </tr>
+        <tr>
+          <?php
+            $sheerit_meuveret = Year::sheerit_shana_meuveret();
+          ?>
+          <td>שארית שנה מעוברת:</td>
+          <td id="meuvarot_days"><?= $sheerit_meuveret->days; ?></td>
+          <td id="meuvarot_hours"><?= $sheerit_meuveret->hours; ?></td>
+          <td id="meuvarot_chalakim"><?= $sheerit_meuveret->chalakim; ?></td>
+          <td id="meuvarot_times" style="background-color:unset;background-image:unset;border:unset;font-weight:normal;"></td>
+          <td id="meuvarot_days_total"></td>
+          <td id="meuvarot_hours_total"></td>
+          <td id="meuvarot_chalakim_total"></td>
+        </tr>
+        <tr>
+          <?php
+              $ib_tashtzag = Molad::ib_tashtzag();
+          ?>
+          <td>חודשים:</td>
+          <td><?= $ib_tashtzag->days; ?></td>
+          <td><?= $ib_tashtzag->hours; ?></td>
+          <td><?= $ib_tashtzag->chalakim; ?></td>
+          <?php
+            $months2nisan = is_meuveret($this_year) ? 7 : 6;
+            $ib_tashtzag->multiply($months2nisan);
+          ?> 
+          <td id="months2nisan" style="background-color:unset;background-image:unset;border:unset;font-weight:normal;"><?= $months2nisan; ?></td>
+          <td id="months2nisan_days"><?= $ib_tashtzag->days; ?></td>
+          <td id="months2nisan_hours"><?= $ib_tashtzag->hours; ?></td>
+          <td id="months2nisan_chalakim"><?= $ib_tashtzag->chalakim; ?></td>
+        </tr>
+        <tr>
+          <td>המולד הראשון (בהר"ד):</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td style="background-color:unset;background-image:unset;border:unset;font-weight:normal;"></td>
+          <td id="baharad_days">2</td>
+          <td id="baharad_hours">5</td>
+          <td id="baharad_chalakim">204</td>
+        </tr>
+        <tr class="total">
+          <td>סה"כ:</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td style="background-color:unset;background-image:unset;border:unset;font-weight:normal;"></td>
+          <td id="total_days"></td>
+          <td id="total_hours"></td>
+          <td id="total_chalakim"></td>
+        </tr>
+        <tr>
+          <td>תרגומו (מולד ניסן):</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td style="background-color:unset;background-image:unset;border:unset;font-weight:normal;"></td>
+          <td id="total_translation_days"></td>
+          <td id="total_translation_hours"></td>
+          <td id="total_translation_chalakim"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div hidden id="hidden_machzor"></div>
+
+    <?php
+    #endregion
     ?>
   </div>
 
   <a href="/perek10.php" style="pointer-events: none;"><i class="fas fa-arrow-alt-circle-left float-start" style="font-size: 24px; color: #337ab7; opacity: 0.5;"></i></a>
   <a href="/perek8.php"><i class="fas fa-arrow-alt-circle-right float-end" style="font-size: 24px; color: #337ab7;"></i></a>
 </body>
+<script type="text/javascript">
+  function calculate_machzor() {
+    let year = $("#the_year").val();
+    let months2nisan = is_meuveret(year) ? 7 : 6;
+
+    let have_passed = before_the_year(year);
+    let machzorim = have_passed.machzorim;
+    let meuvarot = have_passed.meuvarot;
+    let pshutot = have_passed.pshutot;
+
+    let is_year = meuvarot + pshutot;
+    let is_machzor = machzorim + 1;
+
+    if (is_year == YEARS_IN_MACHZOR)
+    {
+      is_year = 1;
+      is_machzor++;
+    }
+    else
+    {
+      is_year++;
+    }
+
+    $('#is_year').val(is_year);
+    $('#of_machzor').val(is_machzor);
+
+    $('#machzorim_passed').val(machzorim);
+    $('#pshutot_passed').val(pshutot);
+    $('#meuvarot_passed').val(meuvarot);
+    $('#machzorim_times').text(machzorim);
+    $('#pshutot_times').text(pshutot);
+    $('#meuvarot_times').text(meuvarot);
+
+    $("#hidden_machzor").load('calculate_tkufas_nisan.php', {
+        'machzorim'   : machzorim,
+        'pshutot'     : pshutot,
+        'meuvarot'    : meuvarot,
+        'months2nisan': months2nisan,
+      },
+      function() {
+        let machzor_info = $(this).text();
+        machzor_info = JSON.parse(machzor_info);
+
+        $('#machzorim_days_total').text(machzor_info.machzorim.days);
+        $('#machzorim_hours_total').text(machzor_info.machzorim.hours);
+        $('#machzorim_chalakim_total').text(machzor_info.machzorim.chalakim);
+        
+        $('#pshutot_days_total').text(machzor_info.pshutot.days);
+        $('#pshutot_hours_total').text(machzor_info.pshutot.hours);
+        $('#pshutot_chalakim_total').text(machzor_info.pshutot.chalakim);
+
+        $('#meuvarot_days_total').text(machzor_info.meuvarot.days);
+        $('#meuvarot_hours_total').text(machzor_info.meuvarot.hours);
+        $('#meuvarot_chalakim_total').text(machzor_info.meuvarot.chalakim);
+
+        $('#months2nisan').text(months2nisan);
+        $('#months2nisan_days').text(machzor_info.months2nisan.days);
+        $('#months2nisan_hours').text(machzor_info.months2nisan.hours);
+        $('#months2nisan_chalakim').text(machzor_info.months2nisan.chalakim);
+
+        $('#total_days').text(machzor_info.total.days);
+        $('#total_hours').text(machzor_info.total.hours);
+        $('#total_chalakim').text(machzor_info.total.chalakim);
+
+        $('#total_translation_days').text(machzor_info.translation.day);
+        $('#total_translation_hours').text(machzor_info.translation.hour);
+        $('#total_translation_chalakim').text(machzor_info.translation.chalakim);
+      }
+    );
+  }
+  
+  calculate_machzor();
+  //TODO: Calculate tkufas nisan!
+</script>

@@ -37,16 +37,17 @@ class Molad {
   }
 
   // public function sum($moladim1, $moladim2)
-  public function add($molad)
+  public function add($molad, $adjust = true)
   {
     $this->days     += $molad->days;
     $this->hours    += $molad->hours;
     $this->chalakim += $molad->chalakim;
 
-    $this->adjust();
+    if ($adjust)
+      $this->adjust();
   }
 
-  public function subtract($molad) // the molad passed in is assumed to be smaller
+  public function subtract($molad, $adjust = true) // the molad passed in is assumed to be smaller
   {
     // instead of making sure the numbers in moladim1 are large enough by "borrowing",
     // convert days and hours to chalakim. Then adjust function will later fix things
@@ -58,26 +59,29 @@ class Molad {
     $this->days       = $this->hours  = 0;
     $this->chalakim  -= $clone->chalakim;
 
-    $this->adjust();
+    if ($adjust)
+      $this->adjust();
   }
 
-  public function multiply($factor)
+  public function multiply($factor, $adjust = true)
   {
     // convert days and hours to chalakim. Then adjust function will later fix things
     $this->chalakim += (($this->days * HOURS_IN_DAY) + $this->hours) * CHALAKIM_IN_HOUR;
     $this->days      = $this->hours = 0;
     $this->chalakim  *= $factor;
 
-    $this->adjust();
+    if ($adjust)
+      $this->adjust();
   }
 
-  public function moladim($months)
+  public function moladim($months, $adjust = true)
   {
     $this->days     = $months * DAYS_IN_MOLAD;
     $this->hours    = $months * HOURS_IN_MOLAD;
     $this->chalakim = $months * CHALAKIM_IN_MOLAD;
 
-    $this->adjust();
+    if ($adjust)
+      $this->adjust();
   }
 
   // remove days that form whole weeks

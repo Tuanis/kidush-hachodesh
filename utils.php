@@ -93,4 +93,24 @@ getJSConstants();
 
     return {machzorim: machzorim, meuvarot: meuvarot, pshutot: pshutot};
   }
+
+  function is_meuveret(year)
+  {
+    year %= YEARS_IN_MACHZOR;
+    if (year === 0)
+      year = YEARS_IN_MACHZOR; // might as well just return true
+
+    for (let leapYear of LEAP_YEARS)
+    {
+      if (leapYear === year)
+        return true;
+    }
+
+    return false;
+  }
+
+  function is_pshuta(year)
+  {
+    return !is_meuveret(year);
+  }
 </script>

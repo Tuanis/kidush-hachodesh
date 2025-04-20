@@ -17,7 +17,7 @@ ol
 {
   list-style-type: hebrew;
 }
-tr.total
+tr.total, td.total
 {
   border-top: double;
 }
